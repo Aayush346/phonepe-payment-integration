@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Simple Payment</title>
+</head>
+<body>
+    <h1>Test Simple Payment Function</h1>
+    <button onclick="testPayment()">Test Payment Creation</button>
+    <div id="result"></div>
+
+    <script>
+        async function testPayment() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Testing payment creation...';
+            
+            try {
+                const response = await fetch('https://keowmvlikgcvnlkgadzi.supabase.co/functions/v1/create-payment-simple', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtlb3dtdmxpa2djdm5sa2dhZHppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYyMjAzNzgsImV4cCI6MjA3MTc5NjM3OH0.2IZbAlWW8l3Ajcx3QEXA8IwWh0xrWkck13TOU3W1BqE'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test User',
+                        phone: '9876543210',
+                        amount: 100
+                    })
+                });
+                
+                const data = await response.json();
+                resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                
+                if (!response.ok) {
+                    resultDiv.innerHTML += `<p style="color: red;">Status: ${response.status}</p>`;
+                } else {
+                    resultDiv.innerHTML += `<p style="color: green;">Status: ${response.status} - Success!</p>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
