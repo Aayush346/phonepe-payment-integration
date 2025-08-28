@@ -15,8 +15,8 @@ const PHONEPE_CONFIG = {
   CLIENT_VERSION: Deno.env.get('PHONEPE_CLIENT_VERSION') || 'v2',
   BASE_URL: Deno.env.get('PHONEPE_PRODUCTION_BASE_URL') || 'https://api.phonepe.com/apis/pg',
   AUTH_BASE_URL: Deno.env.get('PHONEPE_AUTH_BASE_URL') || 'https://api.phonepe.com/apis/identity-manager',
-  CALLBACK_URL: 'https://keowmvlikgcvnlkgadzi.supabase.co/functions/v1/phonepe-webhook',
-  REDIRECT_URL: 'https://keowmvlikgcvnlkgadzi.supabase.co/payment-status'
+  CALLBACK_URL: `${Deno.env.get('SUPABASE_URL')}/functions/v1/phonepe-webhook`,
+  REDIRECT_URL: `${Deno.env.get('SUPABASE_URL')}/payment-status`
 }
 
 interface PaymentRequest {
