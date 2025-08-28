@@ -4,7 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
-  SECRETS_SCAN_OMIT_PATHS = "*.md,test-*.html,supabase/functions/create-payment-simple/index.ts"
+  SECRETS_SCAN_OMIT_PATHS = "*.md,test-*.html,supabase/functions/create-payment-simple/index.ts,dist/**"
 
 [[redirects]]
   from = "/*"
